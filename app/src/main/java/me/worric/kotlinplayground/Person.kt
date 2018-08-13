@@ -6,4 +6,10 @@ class Person(var name: String, var surname: String) {
 
     fun getNameFullName(): String = "$name + $surname"
 
+    var skod: String = ""
+        get() = field.toUpperCase()
+        set(value) {
+            field = "name: $value"
+        }
+
 }
