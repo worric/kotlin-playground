@@ -1,10 +1,13 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
+import me.worric.kotlinplayground.R
+import me.worric.kotlinplayground.data.Person
+import me.worric.kotlinplayground.data.Request
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.longToast

@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.data
 
 class Person(var name: String, var surname: String) {
 

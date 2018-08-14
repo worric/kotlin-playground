@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

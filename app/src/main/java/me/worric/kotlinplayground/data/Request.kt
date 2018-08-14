@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.data
 
 import android.util.Log
 import java.net.URL
