@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.domain
+package me.worric.kotlinplayground.domain.model
 
 data class ForecastList(val city: String, val country: String, val dailyForecast: List<Forecast>)
 

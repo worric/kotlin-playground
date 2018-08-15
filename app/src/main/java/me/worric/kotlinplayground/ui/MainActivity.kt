@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.data.Person
-import me.worric.kotlinplayground.domain.RequestForecastCommand
+import me.worric.kotlinplayground.domain.commands.RequestForecastCommand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread

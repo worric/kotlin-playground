@@ -3,7 +3,7 @@ package me.worric.kotlinplayground.ui
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
-import me.worric.kotlinplayground.domain.ForecastList
+import me.worric.kotlinplayground.domain.model.ForecastList
 
 class ForecastListAdapter(val weekForecast: ForecastList) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {

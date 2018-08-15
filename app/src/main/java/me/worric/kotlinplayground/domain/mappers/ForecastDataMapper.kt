@@ -1,11 +1,12 @@
-package me.worric.kotlinplayground.domain
+package me.worric.kotlinplayground.domain.mappers
 
 import me.worric.kotlinplayground.data.Forecast
 import me.worric.kotlinplayground.data.ForecastResult
+import me.worric.kotlinplayground.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import me.worric.kotlinplayground.domain.Forecast as ModelForecast
+import me.worric.kotlinplayground.domain.model.Forecast as ModelForecast
 
 class ForecastDataMapper {
 
@@ -21,7 +22,7 @@ class ForecastDataMapper {
         }
     }
 
-    private fun convertForecastItemToDomain(forecast: Forecast): me.worric.kotlinplayground.domain.Forecast {
+    private fun convertForecastItemToDomain(forecast: Forecast): me.worric.kotlinplayground.domain.model.Forecast {
         return ModelForecast(convertDate(forecast.dt), forecast.weather[0].description, forecast.temp.max.toInt(), forecast.temp.min.toInt())
     }
 
