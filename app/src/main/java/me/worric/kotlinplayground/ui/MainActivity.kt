@@ -7,10 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.data.Person
-import me.worric.kotlinplayground.data.Request
+import me.worric.kotlinplayground.domain.RequestForecastCommand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         val forecastList: RecyclerView = find(R.id.rv_forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
 
         val person = Person(name = "John", surname = "Smith")
         toast(message = person.getNameFullName())
@@ -40,8 +38,8 @@ class MainActivity : AppCompatActivity() {
                 "APPID=15646a06818f61f7b8d7823ca833e1ce&q=94043&mode=json&units=metric&cnt=7"
 
         doAsync {
-            Request(url).run()
-            uiThread { longToast("Request performed") }
+            val result = RequestForecastCommand("94043").execute()
+            uiThread { forecastList.adapter = ForecastListAdapter(result) }
         }
     }
 
