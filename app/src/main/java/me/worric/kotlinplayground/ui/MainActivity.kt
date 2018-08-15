@@ -31,16 +31,13 @@ class MainActivity : AppCompatActivity() {
         val forecastList: RecyclerView = find(R.id.rv_forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
 
-        val person = Person(name = "John", surname = "Smith")
-        toast(message = person.getNameFullName())
-
-        val url = "http://api.openweathermap.org/data/2.5/forecast/daily?" +
-                "APPID=15646a06818f61f7b8d7823ca833e1ce&q=94043&mode=json&units=metric&cnt=7"
-
         doAsync {
             val result = RequestForecastCommand("94043").execute()
             uiThread { forecastList.adapter = ForecastListAdapter(result) }
         }
+
+        val person = Person(name = "John", surname = "Smith")
+        toast(message = person.getNameFullName())
     }
 
     fun toast(message: String,
