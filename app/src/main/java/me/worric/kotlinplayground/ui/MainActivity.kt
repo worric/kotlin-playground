@@ -8,7 +8,6 @@ import android.widget.Toast
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.data.Person
 import me.worric.kotlinplayground.domain.commands.RequestForecastCommand
-import me.worric.kotlinplayground.domain.model.Forecast
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
@@ -34,13 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         doAsync {
             val result = RequestForecastCommand("94043").execute()
-            uiThread {
-                forecastList.adapter = ForecastListAdapter(result,
-                        object : ForecastListAdapter.OnItemClickListener {
-                            override fun invoke(forecast: Forecast) {
-                                toast(forecast.date)
-                            }
-                        })
+            uiThread { _ ->
+                // Simplify even further by using "it"; then we avoid left side of arrow
+                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
             }
         }
 

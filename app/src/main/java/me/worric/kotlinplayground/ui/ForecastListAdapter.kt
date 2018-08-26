@@ -13,7 +13,8 @@ import me.worric.kotlinplayground.domain.model.ForecastList
 import me.worric.kotlinplayground.ui.utils.ctx
 import org.jetbrains.anko.find
 
-class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemClickListener) :
+class ForecastListAdapter(val weekForecast: ForecastList,
+                          val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +28,9 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemC
         holder.bindForecast(weekForecast[position])
     }
 
-    class ViewHolder(val view: View, val itemClick: OnItemClickListener) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View,
+                     val itemClick: (Forecast) -> Unit) :
+            RecyclerView.ViewHolder(view) {
         private val iconView = view.find<ImageView>(R.id.icon)
         private val dateView = view.find<TextView>(R.id.date)
         private val descriptionView = view.find<TextView>(R.id.description)
@@ -44,10 +47,6 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemC
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
-    }
-
-    interface OnItemClickListener {
-        operator fun invoke(forecast: Forecast)
     }
 
 }
