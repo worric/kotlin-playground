@@ -15,8 +15,8 @@ class NotNullSingleValue<T> {
         else throw IllegalStateException("${property.name} already initialized")
     }
 
-    object DelegatesExt {
-        fun <T> notNullSingleValue() = NotNullSingleValue<T>()
-    }
+}
 
+object DelegatesExt {
+    fun <T> notNullSingleValue() = NotNullSingleValue<T>()
 }

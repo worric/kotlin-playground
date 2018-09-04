@@ -5,7 +5,7 @@ import android.app.Application
 class App : Application() {
 
     companion object {
-        var instance: App by NotNullSingleValue()
+        var instance: App by DelegatesExt.notNullSingleValue()
     }
 
     override fun onCreate() {
