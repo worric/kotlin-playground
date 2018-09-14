@@ -14,12 +14,24 @@ class ForecastDbHelper : ManagedSQLiteOpenHelper(App.instance, DB_NAME, null, DB
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.createTable(CityForecastTable.NAME, true,
-                Pair(CityForecastTable.ID, INTEGER + PRIMARY_KEY),
-                Pair(CityForecastTable.CITY, TEXT),
-                Pair(CityForecastTable.COUNTRY, TEXT))
+                CityForecastTable.ID to INTEGER + PRIMARY_KEY,
+                CityForecastTable.CITY to TEXT,
+                CityForecastTable.COUNTRY to TEXT)
+
+        db?.createTable(DayForecastTable.NAME, true,
+                DayForecastTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                DayForecastTable.DATE to INTEGER,
+                DayForecastTable.DESCRIPTION to TEXT,
+                DayForecastTable.HIGH to INTEGER,
+                DayForecastTable.LOW to INTEGER,
+                DayForecastTable.ICON_URL to TEXT,
+                DayForecastTable.CITY_ID to INTEGER)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        db?.dropTable(CityForecastTable.NAME, true)
+        db?.dropTable(DayForecastTable.NAME, true)
+        onCreate(db)
     }
+    
 }
