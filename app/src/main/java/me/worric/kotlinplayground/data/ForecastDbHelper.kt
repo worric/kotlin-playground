@@ -1,10 +1,13 @@
 package me.worric.kotlinplayground.data
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import me.worric.kotlinplayground.App
 import org.jetbrains.anko.db.*
 
-class ForecastDbHelper : ManagedSQLiteOpenHelper(App.instance, DB_NAME, null, DB_VERSION) {
+class ForecastDbHelper(ctx: Context = App.instance) :
+        ManagedSQLiteOpenHelper(ctx, ForecastDbHelper.DB_NAME, null,
+                ForecastDbHelper.DB_VERSION) {
 
     companion object {
         val DB_NAME = "forecast.db"
@@ -33,5 +36,5 @@ class ForecastDbHelper : ManagedSQLiteOpenHelper(App.instance, DB_NAME, null, DB
         db?.dropTable(DayForecastTable.NAME, true)
         onCreate(db)
     }
-    
+
 }
