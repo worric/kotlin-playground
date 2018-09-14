@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.data
+package me.worric.kotlinplayground.data.server
 
 import com.google.gson.Gson
 

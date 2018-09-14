@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.data
+package me.worric.kotlinplayground.data.server
 
 data class ForecastResult(val city: City, val list: List<Forecast>)
 

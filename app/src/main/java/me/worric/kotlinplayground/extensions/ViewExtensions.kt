@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.ui.utils
+package me.worric.kotlinplayground.extensions
 
 import android.content.Context
 import android.view.View

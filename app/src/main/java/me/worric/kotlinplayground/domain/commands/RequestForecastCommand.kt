@@ -1,6 +1,6 @@
 package me.worric.kotlinplayground.domain.commands
 
-import me.worric.kotlinplayground.data.ForecastRequest
+import me.worric.kotlinplayground.data.server.ForecastRequest
 import me.worric.kotlinplayground.domain.mappers.ForecastDataMapper
 import me.worric.kotlinplayground.domain.model.ForecastList
 

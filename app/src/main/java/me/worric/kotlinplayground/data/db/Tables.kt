@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.data
+package me.worric.kotlinplayground.data.db
 
 object CityForecastTable {
     val NAME = "CityForecast"
