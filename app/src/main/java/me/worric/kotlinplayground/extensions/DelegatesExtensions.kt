@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.extensions
 
 import kotlin.reflect.KProperty
 

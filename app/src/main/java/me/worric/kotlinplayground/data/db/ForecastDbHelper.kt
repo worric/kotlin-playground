@@ -1,8 +1,8 @@
-package me.worric.kotlinplayground.data
+package me.worric.kotlinplayground.data.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import me.worric.kotlinplayground.App
+import me.worric.kotlinplayground.ui.App
 import org.jetbrains.anko.db.*
 
 class ForecastDbHelper(ctx: Context = App.instance) :

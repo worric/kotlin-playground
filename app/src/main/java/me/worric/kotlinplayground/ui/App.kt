@@ -1,6 +1,7 @@
-package me.worric.kotlinplayground
+package me.worric.kotlinplayground.ui
 
 import android.app.Application
+import me.worric.kotlinplayground.extensions.DelegatesExt
 
 class App : Application() {
 

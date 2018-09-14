@@ -1,7 +1,7 @@
 package me.worric.kotlinplayground.domain.mappers
 
-import me.worric.kotlinplayground.data.Forecast
-import me.worric.kotlinplayground.data.ForecastResult
+import me.worric.kotlinplayground.data.server.Forecast
+import me.worric.kotlinplayground.data.server.ForecastResult
 import me.worric.kotlinplayground.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*

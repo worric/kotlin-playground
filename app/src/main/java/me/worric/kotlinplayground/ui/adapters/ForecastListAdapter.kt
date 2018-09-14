@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.ui
+package me.worric.kotlinplayground.ui.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_forecast.view.*
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.domain.model.Forecast
 import me.worric.kotlinplayground.domain.model.ForecastList
-import me.worric.kotlinplayground.ui.utils.ctx
+import me.worric.kotlinplayground.extensions.ctx
 
 class ForecastListAdapter(val weekForecast: ForecastList,
                           val itemClick: (Forecast) -> Unit) :

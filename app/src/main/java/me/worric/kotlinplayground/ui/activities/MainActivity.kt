@@ -1,4 +1,4 @@
-package me.worric.kotlinplayground.ui
+package me.worric.kotlinplayground.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.data.Person
 import me.worric.kotlinplayground.domain.commands.RequestForecastCommand
+import me.worric.kotlinplayground.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
