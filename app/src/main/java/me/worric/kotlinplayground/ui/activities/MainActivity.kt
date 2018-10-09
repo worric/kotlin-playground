@@ -11,6 +11,8 @@ import me.worric.kotlinplayground.domain.commands.RequestForecastCommand
 import me.worric.kotlinplayground.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.text.DateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
-            val result = RequestForecastCommand("94043").execute()
+            val result = RequestForecastCommand(94043L).execute()
             uiThread { _ ->
                 // Simplify even further by using "it"; then we avoid left side of arrow
-                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
+                forecastList.adapter = ForecastListAdapter(result) { toast(convertDate(it.date)) }
             }
         }
 
@@ -46,6 +48,11 @@ class MainActivity : AppCompatActivity() {
               length: Int = Toast.LENGTH_SHORT,
               tag: String = MainActivity::class.java.simpleName) {
         Toast.makeText(this, "[$tag] $message", length).show()
+    }
+
+    private fun convertDate(date: Long): String {
+        val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+        return df.format(date)
     }
 
 }
