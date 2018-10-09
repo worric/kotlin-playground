@@ -2,7 +2,7 @@ package me.worric.kotlinplayground.data.server
 
 import com.google.gson.Gson
 
-class ForecastRequest(val zipCode: String) {
+class ForecastRequest(private val zipCode: Long) {
 
     companion object {
         private val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"
