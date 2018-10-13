@@ -1,14 +1,17 @@
 package me.worric.kotlinplayground.domain.commands
 
-import me.worric.kotlinplayground.data.server.ForecastRequest
-import me.worric.kotlinplayground.domain.mappers.ForecastDataMapper
+import me.worric.kotlinplayground.domain.datasource.ForecastProvider
 import me.worric.kotlinplayground.domain.model.ForecastList
 
-class RequestForecastCommand(private val zipCode: Long) : Command<ForecastList> {
+class RequestForecastCommand(
+        private val zipCode: Long,
+        private val forecastProvider: ForecastProvider = ForecastProvider())
+    : Command<ForecastList> {
 
-    override fun execute(): ForecastList {
-        val forecastRequest = ForecastRequest(zipCode)
-        return ForecastDataMapper().convertFromDataModel(zipCode, forecastRequest.execute())
+    companion object {
+        val DAYS = 7
     }
+
+    override fun execute(): ForecastList = forecastProvider.requestByZipCode(zipCode, DAYS)
 
 }

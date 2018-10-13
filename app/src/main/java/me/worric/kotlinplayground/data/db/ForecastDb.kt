@@ -3,6 +3,7 @@ package me.worric.kotlinplayground.data.db
 import me.worric.kotlinplayground.data.db.mappers.DbDataMapper
 import me.worric.kotlinplayground.data.db.model.CityForecast
 import me.worric.kotlinplayground.data.db.model.DayForecast
+import me.worric.kotlinplayground.domain.datasource.ForecastDataSource
 import me.worric.kotlinplayground.domain.model.ForecastList
 import me.worric.kotlinplayground.extensions.clear
 import me.worric.kotlinplayground.extensions.parseList
@@ -11,11 +12,11 @@ import me.worric.kotlinplayground.extensions.toVarArgArray
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
-class ForecastDb(
-        val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-        val dataMapper: DbDataMapper = DbDataMapper()) {
+class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
+                 val dataMapper: DbDataMapper = DbDataMapper())
+    : ForecastDataSource {
 
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
