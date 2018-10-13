@@ -1,9 +1,9 @@
 package me.worric.kotlinplayground.ui.adapters
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.domain.model.Forecast
@@ -14,7 +14,7 @@ import java.util.*
 
 class ForecastListAdapter(val weekForecast: ForecastList,
                           val itemClick: (Forecast) -> Unit) :
-        androidx.recyclerview.widget.RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
+        RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.ctx).inflate(R.layout.item_forecast, parent, false)
@@ -28,7 +28,7 @@ class ForecastListAdapter(val weekForecast: ForecastList,
     }
 
     class ViewHolder(val view: View, val itemClick: (Forecast) -> Unit) :
-            androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+            RecyclerView.ViewHolder(view) {
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
