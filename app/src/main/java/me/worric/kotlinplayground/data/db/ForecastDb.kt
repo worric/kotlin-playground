@@ -5,17 +5,13 @@ import me.worric.kotlinplayground.data.db.model.CityForecast
 import me.worric.kotlinplayground.data.db.model.DayForecast
 import me.worric.kotlinplayground.domain.datasource.ForecastDataSource
 import me.worric.kotlinplayground.domain.model.ForecastList
-import me.worric.kotlinplayground.extensions.clear
-import me.worric.kotlinplayground.extensions.parseList
-import me.worric.kotlinplayground.extensions.parseOpt
-import me.worric.kotlinplayground.extensions.toVarArgArray
+import me.worric.kotlinplayground.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
                  val dataMapper: DbDataMapper = DbDataMapper())
     : ForecastDataSource {
-
     override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
@@ -29,6 +25,14 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
 
         if (city != null) dataMapper.convertToDomain(city) else null
 
+    }
+
+    override fun requestDayForecast(id: Long) = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME)
+                .byId(id)
+                .parseOpt { DayForecast(HashMap(it)) }
+
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
     }
 
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {

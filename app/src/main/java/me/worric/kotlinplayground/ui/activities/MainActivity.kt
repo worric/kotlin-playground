@@ -10,6 +10,8 @@ import me.worric.kotlinplayground.data.Person
 import me.worric.kotlinplayground.domain.commands.RequestForecastCommand
 import me.worric.kotlinplayground.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 import java.util.*
@@ -36,7 +38,12 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand(94043L).execute()
             uiThread { _ ->
                 // Simplify even further by using "it"; then we avoid left side of arrow
-                forecastList.adapter = ForecastListAdapter(result) { toast(convertDate(it.date)) }
+                forecastList.adapter = ForecastListAdapter(result) {
+                    startActivity<DetailActivity>(DetailActivity.ID to it.id,
+                            DetailActivity.CITY_NAME to result.city)
+                }
+                title = "${result.city} (${result.country})"
+//                    toast(convertDate(it.date)) }
             }
         }
 

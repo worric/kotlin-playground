@@ -9,8 +9,7 @@ import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.domain.model.Forecast
 import me.worric.kotlinplayground.domain.model.ForecastList
 import me.worric.kotlinplayground.extensions.ctx
-import java.text.DateFormat
-import java.util.*
+import me.worric.kotlinplayground.extensions.toDateString
 
 class ForecastListAdapter(val weekForecast: ForecastList,
                           val itemClick: (Forecast) -> Unit) :
@@ -33,17 +32,12 @@ class ForecastListAdapter(val weekForecast: ForecastList,
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
 //                Picasso.get().load(iconUrl).into(itemView.icon)
-                itemView.date.text = convertDate(date)
+                itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "${low}"
                 itemView.setOnClickListener { itemClick(this) }
             }
-        }
-
-        private fun convertDate(date: Long): String {
-            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(date)
         }
     }
 }
