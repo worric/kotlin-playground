@@ -23,8 +23,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
                 .whereSimple("${CityForecastTable.ID} = ?", zipCode.toString())
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
-        if (city != null) dataMapper.convertToDomain(city) else null
-
+        city?.let { dataMapper.convertToDomain(it) }
     }
 
     override fun requestDayForecast(id: Long) = forecastDbHelper.use {
@@ -32,7 +31,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
                 .byId(id)
                 .parseOpt { DayForecast(HashMap(it)) }
 
-        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
+        forecast?.let { dataMapper.convertDayToDomain(forecast) }
     }
 
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {
