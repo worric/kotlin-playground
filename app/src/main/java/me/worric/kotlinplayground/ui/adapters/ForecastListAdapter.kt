@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.domain.model.Forecast
@@ -31,7 +32,7 @@ class ForecastListAdapter(val weekForecast: ForecastList,
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
-//                Picasso.get().load(iconUrl).into(itemView.icon)
+                Picasso.get().load(iconUrl).into(itemView.icon)
                 itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"

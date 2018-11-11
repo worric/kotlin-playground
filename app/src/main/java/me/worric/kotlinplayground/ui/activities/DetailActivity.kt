@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import me.worric.kotlinplayground.R
 import me.worric.kotlinplayground.domain.commands.RequestDayForecastCommand
 import me.worric.kotlinplayground.domain.model.Forecast
 import me.worric.kotlinplayground.extensions.color
 import me.worric.kotlinplayground.extensions.textColor
 import me.worric.kotlinplayground.extensions.toDateString
-import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.coroutines.experimental.asReference
 import org.jetbrains.anko.find
-import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 
 class DetailActivity : AppCompatActivity(), ToolbarManager {
@@ -33,14 +37,17 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
         toolbarTitle = intent.getStringExtra(CITY_NAME)
         enableHomeAsUp { onBackPressed() }
 
-        doAsync {
-            val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
-            uiThread { bindForecast(result) }
+        val ref = asReference()
+        val id = intent.getLongExtra(ID, -1)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = async { RequestDayForecastCommand(id).execute() }
+            ref().bindForecast(result.await())
         }
     }
 
     private fun bindForecast(forecast: Forecast) = with(forecast) {
-//        Picasso.with(ctx).load(iconUrl).into(icon)
+        Picasso.get().load(iconUrl).into(icon)
         toolBar.subtitle = date.toDateString(DateFormat.FULL)
         weatherDescription.text = description
         bindWeather(high to maxTemperature, low to minTemperature)
